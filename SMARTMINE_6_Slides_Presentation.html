@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMARTMINE — 6-Slide Executive Pitch Deck (NMDC #26007)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --cyan-primary: #06b6d4;
+      --cyan-bright: #22d3ee;
+      --cyan-glow: rgba(6, 182, 212, 0.25);
+      --amber-alert: #f59e0b;
+      --red-alert: #ef4444;
+      --emerald-safe: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+    }
+
+    /* Top Progress Bar */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 16.66%;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #6366f1);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Deck Header Controls */
+    .deck-header {
+      position: fixed;
+      top: 10px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 90;
+      pointer-events: none;
+    }
+    .badge-tag {
+      background: rgba(8, 145, 178, 0.2);
+      border: 1px solid rgba(34, 211, 238, 0.4);
+      color: var(--cyan-bright);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      pointer-events: auto;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      pointer-events: auto;
+    }
+    .ctrl-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ctrl-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fff;
+      border-color: var(--cyan-bright);
+    }
+    .ctrl-btn.active {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--cyan-bright);
+      border-color: var(--cyan-bright);
+    }
+
+    /* Slides Container */
+    .slides-wrapper {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.97) translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+      padding: 60px 50px 70px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Slide Header */
+    .slide-header {
+      margin-bottom: 20px;
+    }
+    .slide-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan-bright);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Content Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan-bright), transparent);
+      opacity: 0.3;
+    }
+    .card.alert-card {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(35, 10, 15, 0.5);
+    }
+    .card.alert-card::before {
+      background: linear-gradient(90deg, transparent, var(--red-alert), transparent);
+      opacity: 0.8;
+    }
+    .card.safe-card {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(6, 35, 25, 0.5);
+    }
+    .card.safe-card::before {
+      background: linear-gradient(90deg, transparent, var(--emerald-safe), transparent);
+      opacity: 0.8;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .pill-list {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pill-list li {
+      font-size: 12.5px;
+      color: #e2e8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .bullet-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan-bright);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .bullet-dot.red { background: var(--red-alert); }
+    .bullet-dot.green { background: var(--emerald-safe); }
+    .bullet-dot.amber { background: var(--amber-alert); }
+
+    /* Formula & Highlight Boxes */
+    .formula-box {
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan-bright);
+      font-size: 13px;
+      margin: 10px 0;
+    }
+
+    /* Metric Badges */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .metric-badge {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .metric-value {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Speaker Notes Drawer (Bottom) */
+    .speaker-notes-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 15, 29, 0.96);
+      border-top: 2px solid var(--cyan-primary);
+      padding: 16px 30px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 95;
+      max-height: 180px;
+      overflow-y: auto;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 -10px 25px rgba(0,0,0,0.6);
+    }
+    .speaker-notes-drawer.open {
+      transform: translateY(0);
+    }
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .notes-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--cyan-bright);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .notes-content {
+      font-size: 14px;
+      color: #f1f5f9;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* Slide Footer Navigation */
+    .deck-footer {
+      position: fixed;
+      bottom: 14px;
+      left: 30px;
+      right: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 90;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      pointer-events: auto;
+    }
+    .nav-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--cyan-primary);
+      color: #000;
+      font-weight: bold;
+      border-color: var(--cyan-bright);
+    }
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Benefits Modal */
+    .benefits-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 18, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 150;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .benefits-modal.open {
+      display: flex;
+    }
+    .benefits-modal-content {
+      background: #0f172a;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 14px;
+      max-width: 1100px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.2);
+    }
+    .benefits-modal-header {
+      padding: 12px 20px;
+      background: #090d16;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tab-group {
+      display: flex;
+      gap: 8px;
+    }
+    .tab-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: rgba(6, 182, 212, 0.25);
+      color: var(--cyan-bright);
+      border-color: var(--cyan-bright);
+      font-weight: 700;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 6px;
+      transition: color 0.2s;
+    }
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+    .benefits-image-container {
+      padding: 16px;
+      background: #020617;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+    }
+    .benefit-img {
+      max-width: 100%;
+      max-height: 72vh;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: none;
+      object-fit: contain;
+    }
+    .benefit-img.active {
+      display: block;
+    }
+
+    /* Print styling for direct PDF generation */
+    @media print {
+      body {
+        overflow: visible;
+        height: auto;
+      }
+      .progress-bar-container, .deck-header, .deck-footer, .speaker-notes-drawer, .benefits-modal {
+        display: none !important;
+      }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always;
+        height: 100vh;
+        width: 100vw;
+        padding: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header Info & Controls -->
+  <header class="deck-header">
+    <div class="badge-tag">
+      NMDC PROBLEM STATEMENT #26007 &bull; SMARTMINE
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="openBenefitsModal(1)">
+        🖼️ Benefits Images (I)
+      </button>
+      <button class="ctrl-btn" id="notesToggleBtn" onclick="toggleNotes()">
+        🎙️ Presenter Script (N)
+      </button>
+      <button class="ctrl-btn" onclick="toggleFullscreen()">
+        ⛶ Fullscreen (F)
+      </button>
+      <button class="ctrl-btn" onclick="window.print()">
+        🖨️ Export PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- Slides Container -->
+  <div class="slides-wrapper">
+
+    <!-- ==================== SLIDE 1 ==================== -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 01 &bull; EXECUTIVE VISION &amp; THE HOOK</div>
+        <h1 class="slide-title">SMARTMINE — AI-Powered Fog Safety &amp; Collision Avoidance</h1>
+        <p class="slide-subtitle">Multi-Sensor Redundant Perception Shield for Open-Cast Iron Ore Mining Operations</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: var(--cyan-bright)">
+              <span>🛡️ 1. All-Weather Perception</span>
+            </div>
+            <p class="card-desc">
+              Overcomes optical blindness with a 4-tier sensor suite: <strong>77 GHz mmWave FMCW Radar</strong>, <strong>FLIR Thermal IR</strong>, <strong>RGB AI Vision</strong>, and <strong>5.9 GHz V2V Mesh</strong>.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-badge">
+              <div class="metric-value" style="color: var(--cyan-bright)">150m</div>
+              <div class="metric-label">Radar Range</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #f59e0b">0.05°C</div>
+              <div class="metric-label">Thermal ΔT</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #10b981">10 Hz</div>
+              <div class="metric-label">V2V Mesh</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #f59e0b">
+              <span>📐 2. Physics Collision Engine</span>
+            </div>
+            <p class="card-desc">
+              Replaces dumb proximity beepers with true Newtonian stopping calculations: dynamically factoring in <strong>85–120t dumper mass</strong>, <strong>ramp gradient</strong>, and <strong>fog moisture friction loss</strong>.
+            </p>
+          </div>
+          <div class="formula-box">
+            d_stop = (v &times; 1.5s) + [v² / (2 &times; μ_wet &times; g)]
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #10b981">
+              <span>⚡ 3. Dual Tactical &amp; Strategic Action</span>
+            </div>
+            <p class="card-desc">
+              Immediate life-saving reflex for the driver via <strong>In-Cab HUD &amp; Voice Speech Alerts</strong>; comprehensive tactical awareness for management via <strong>Central Command Digital Twin</strong>.
+            </p>
+          </div>
+          <div class="pill-list">
+            <li><span class="bullet-dot green"></span> Zero-glance voice synthesized warnings</li>
+            <li><span class="bullet-dot green"></span> Live WebSockets fleet telemetry canvas</li>
+            <li><span class="bullet-dot green"></span> Automated 14-step safety lifecycle player</li>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between;">
+        <span>TARGET: Zero Accidents | Uninterrupted 24/7 Iron Ore Dispatch</span>
+        <span>NMDC PROBLEM STATEMENT ID: 26007</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2 ==================== -->
+    <section class="slide" id="slide-2">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 02 &bull; THE MINING CHALLENGE</div>
+        <h1 class="slide-title">The "Sight-Distance Paradox" in Open-Cast Mines</h1>
+        <p class="slide-subtitle">When required heavy dumper stopping distance far exceeds human visibility, disaster is mathematically guaranteed</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card alert-card">
+          <div>
+            <div class="card-title" style="color: var(--red-alert)">
+              <span>🔴 The Ground Reality in Pit Inversions</span>
+            </div>
+            <p class="card-desc">
+              During dense winter mornings and monsoon thermal inversions, particulate dust and moisture droplets reduce driver visual line-of-sight to <strong>3 to 5 meters</strong>.
+            </p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot red"></span> <strong>Optical Blindness:</strong> Standard cameras and human eyes cannot detect unlit equipment or foot workers.</li>
+              <li><span class="bullet-dot red"></span> <strong>LiDAR Scattering:</strong> Near-infrared laser pulses suffer backscatter and dispersion through dense water droplets.</li>
+              <li><span class="bullet-dot red"></span> <strong>GPS Pit Occlusion:</strong> Deep open benches degrade satellite geometry, causing multi-meter drift.</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); margin-top: 12px;">
+            <div class="metric-value" style="color: var(--red-alert)">3 – 5 Meters</div>
+            <div class="metric-label">Actual Visible Horizon in Heavy Fog</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #f59e0b">
+              <span>⚠️ The Uncompromising Newtonian Physics</span>
+            </div>
+            <p class="card-desc">
+              A 100-tonne haul dumper cruising down an unpaved haul road ramp at 30 km/h has immense kinetic momentum and degraded braking traction.
+            </p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot amber"></span> <strong>Driver Perception Lag:</strong> 1.5-second operator reaction time consumes 12.5 meters before brakes engage.</li>
+              <li><span class="bullet-dot amber"></span> <strong>Slick Mud Haul Road:</strong> Fog dampens unpaved dirt, dropping coefficient of friction (&mu;) from 0.65 to 0.35.</li>
+              <li><span class="bullet-dot amber"></span> <strong>The Collision Gap:</strong> Total stopping distance is <strong>18 to 25 meters</strong> &mdash; 5x longer than visibility!</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); margin-top: 12px;">
+            <div class="metric-value" style="color: #f59e0b">18 – 25 Meters</div>
+            <div class="metric-label">Physical Heavy Hauler Stopping Distance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top: 15px; text-align: center; border-color: rgba(239, 68, 68, 0.5); color: #fca5a5;">
+        FATAL EQUATION: Visibility (4m) &lt;&lt; Stopping Distance (21m) &rarr; Production Shutdowns &amp; ₹1.5+ Cr Machine Write-Offs
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3 ==================== -->
+    <section class="slide" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 03 &bull; THE PERCEPTION ARCHITECTURE</div>
+        <h1 class="slide-title">4-Tier Redundant Multi-Sensor Perception Suite</h1>
+        <p class="slide-subtitle">Eliminating single points of failure by combining complementary electromagnetic spectrums</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: var(--cyan-bright)">1. mmWave Radar</div>
+            <p class="card-desc"><strong>77–79 GHz FMCW</strong></p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot"></span> Wavelength pierces water droplets &amp; dust particles</li>
+              <li><span class="bullet-dot"></span> Real-time Doppler relative velocity &amp; distance</li>
+              <li><span class="bullet-dot"></span> Uncompromised in 100% optical fog</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="margin-top: 10px;">
+            <div class="metric-value" style="color: var(--cyan-bright)">96%</div>
+            <div class="metric-label">Fog Penetration</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #f97316">2. Thermal IR</div>
+            <p class="card-desc"><strong>FLIR LWIR (8–14 µm)</strong></p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot amber"></span> Senses thermal heat signatures through thick fog</li>
+              <li><span class="bullet-dot amber"></span> Tracks diesel engine blocks &amp; exhaust manifolds</li>
+              <li><span class="bullet-dot amber"></span> Detects body heat of ground workers at 80m</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="margin-top: 10px;">
+            <div class="metric-value" style="color: #f97316">0.05°C</div>
+            <div class="metric-label">Thermal Sensitivity</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #38bdf8">3. RGB AI Vision</div>
+            <p class="card-desc"><strong>Edge Computer Vision</strong></p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot"></span> High-definition bounding box classification</li>
+              <li><span class="bullet-dot"></span> Distinguishes Dumpers, Excavators, Light Vehicles</li>
+              <li><span class="bullet-dot"></span> High accuracy in clear &amp; moderate daylight</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="margin-top: 10px;">
+            <div class="metric-value" style="color: #38bdf8">60 FPS</div>
+            <div class="metric-label">YOLO Inference</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #10b981">4. V2V RF Mesh</div>
+            <p class="card-desc"><strong>5.9 GHz C-V2X / DSRC</strong></p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot green"></span> Broadcasts 10 Hz position &amp; speed vectors</li>
+              <li><span class="bullet-dot green"></span> Non-Line-of-Sight (NLOS) around blind curves</li>
+              <li><span class="bullet-dot green"></span> Sub-meter differential RTK positioning</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="margin-top: 10px;">
+            <div class="metric-value" style="color: #10b981">&lt; 15 ms</div>
+            <div class="metric-label">Packet Latency</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top: 15px;">
+        <strong>DYNAMIC CONFIDENCE WEIGHTING:</strong> Fused Distance = &Sigma; (Confidence_i &times; Distance_i) / &Sigma; Confidence_i &bull; Automatic handover to Radar + Thermal as camera confidence degrades.
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4 ==================== -->
+    <section class="slide" id="slide-4">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 04 &bull; TECHNICAL &amp; ALGORITHMIC CORE</div>
+        <h1 class="slide-title">Physics-Aware Collision Risk Engine</h1>
+        <p class="slide-subtitle">Dynamically modeling haul road friction, slope gravity, and Time-to-Collision (TTC)</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan-bright)">
+            <span>🔬 Dynamic Newtonian Stopping Physics</span>
+          </div>
+          <p class="card-desc">
+            Unlike highway cars on dry asphalt, heavy dumpers on unpaved open-cast benches obey harsh friction and momentum constraints:
+          </p>
+          <div class="formula-box">
+            d_reaction = v &times; 1.5s  (Human/Air-brake latency)<br>
+            d_braking = v² / (2 &times; μ_eff &times; g)<br>
+            μ_eff = μ_base - Δμ_fog + sin(θ_slope) - Δμ_mass
+          </div>
+          <ul class="pill-list">
+            <li><span class="bullet-dot"></span> <strong>Base Unpaved Dirt:</strong> &mu; = 0.65 (Dry haul ramp)</li>
+            <li><span class="bullet-dot amber"></span> <strong>Wet Fog Reduction:</strong> Drops &mu; by up to 0.22 as moisture settles</li>
+            <li><span class="bullet-dot red"></span> <strong>Downhill Gravity Vector:</strong> sin(&theta;) adds negative retardation force</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: #10b981">
+            <span>🛡️ 4-Tier Dynamic Risk &amp; Alert Matrix</span>
+          </div>
+          <p class="card-desc">
+            Time-to-Collision (TTC) and dynamic stopping envelopes dictate unambiguous driver intervention:
+          </p>
+          <table style="width: 100%; font-size: 12px; margin-top: 10px; border-collapse: collapse; font-family: 'JetBrains Mono', monospace;">
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);">
+              <th style="padding: 6px; text-align: left;">TIER</th>
+              <th style="padding: 6px; text-align: left;">DISTANCE GAP</th>
+              <th style="padding: 6px; text-align: left;">TTC</th>
+              <th style="padding: 6px; text-align: left;">ACTION</th>
+            </tr>
+            <tr style="color: #10b981;">
+              <td style="padding: 6px;">SAFE</td>
+              <td style="padding: 6px;">&gt; 1.75 &times; d_stop</td>
+              <td style="padding: 6px;">&gt; 7.0 s</td>
+              <td style="padding: 6px;">Maintain Speed</td>
+            </tr>
+            <tr style="color: #facc15;">
+              <td style="padding: 6px;">CAUTION</td>
+              <td style="padding: 6px;">&le; 1.75 &times; d_stop</td>
+              <td style="padding: 6px;">&le; 7.0 s</td>
+              <td style="padding: 6px;">Slow to 25 km/h</td>
+            </tr>
+            <tr style="color: #f97316;">
+              <td style="padding: 6px;">HIGH RISK</td>
+              <td style="padding: 6px;">&le; 1.25 &times; d_stop</td>
+              <td style="padding: 6px;">&le; 4.5 s</td>
+              <td style="padding: 6px;">Apply Retarder</td>
+            </tr>
+            <tr style="color: #ef4444; font-weight: bold; background: rgba(239, 68, 68, 0.1);">
+              <td style="padding: 6px;">CRITICAL</td>
+              <td style="padding: 6px;">&le; 0.85 &times; d_stop</td>
+              <td style="padding: 6px;">&le; 2.5 s</td>
+              <td style="padding: 6px;">EMERGENCY BRAKE!</td>
+            </tr>
+          </table>
+          <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
+            &check; Prevents alarm fatigue &bull; Zero false alarms on road berms
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between;">
+        <span>ALGORITHM EXECUTION LATENCY: &lt; 25 ms (Local Jetson Edge Inference)</span>
+        <span>TESTED ACROSS -8° DOWNHILL GRADIENTS</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 5 ==================== -->
+    <section class="slide" id="slide-5">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 05 &bull; USER EXPERIENCE &amp; LIVE DEMO SYSTEM</div>
+        <h1 class="slide-title">Dual Interface: In-Cab HUD &amp; Command Center</h1>
+        <p class="slide-subtitle">Tactical split-second alerts for the operator &bull; Complete strategic visibility for mine dispatchers</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title" style="color: var(--cyan-bright)">
+            <span>🪟 In-Cab Driver HUD &amp; Voice Synthesis</span>
+          </div>
+          <p class="card-desc">
+            Designed specifically for heavy machine drivers operating in zero-visibility conditions with high vibration and thick gloves:
+          </p>
+          <ul class="pill-list">
+            <li><span class="bullet-dot"></span> <strong>High-Contrast Visual HUD:</strong> Large obstacle rangefinder, digital speedometer, and closing speed indicator.</li>
+            <li><span class="bullet-dot amber"></span> <strong>Audio Speech Synthesis Alerts:</strong> Hands-free verbal callouts (<em>"Warning! Excavator ahead 12 meters in dense fog!"</em>).</li>
+            <li><span class="bullet-dot green"></span> <strong>Zero Head-Down Time:</strong> Driver never looks away from the haul path; reflex reaction is instantaneous.</li>
+          </ul>
+          <div class="metric-grid">
+            <div class="metric-badge">
+              <div class="metric-value" style="color: var(--cyan-bright)">100%</div>
+              <div class="metric-label">Hands-Free</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #10b981">0.3s</div>
+              <div class="metric-label">Voice Alert Latency</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #f59e0b">High Vis</div>
+              <div class="metric-label">Night/Fog HUD</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="color: #38bdf8">
+            <span>🌐 Central Command Center Digital Twin</span>
+          </div>
+          <p class="card-desc">
+            Real-time IoT web dashboard connecting dispatchers to the entire mine fleet over bi-directional WebSockets:
+          </p>
+          <ul class="pill-list">
+            <li><span class="bullet-dot"></span> <strong>Interactive Mine Pit Canvas:</strong> Live 2D/3D map displaying vehicle coordinates, headings, and fog opacity zones.</li>
+            <li><span class="bullet-dot"></span> <strong>Automated 14-Step Incident Lifecycle:</strong> Real-time demo player showcasing fog onset, camera loss, radar detection, alert trigger, and hazard clearance.</li>
+            <li><span class="bullet-dot green"></span> <strong>Audit-Grade Black Box Forensics:</strong> Comprehensive incident logging for DGMS mine safety reviews.</li>
+          </ul>
+          <div class="metric-grid">
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #38bdf8">14-Step</div>
+              <div class="metric-label">Demo Scenario</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #10b981">6-Vehicle</div>
+              <div class="metric-label">Live Fleet Mesh</div>
+            </div>
+            <div class="metric-badge">
+              <div class="metric-value" style="color: #f59e0b">Real-Time</div>
+              <div class="metric-label">WebSockets Stream</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top: 15px;">
+        <strong>PROVEN DEMO CAPABILITY:</strong> Single-click automated simulation demonstrating complete fail-safe transition from RGB Camera &rarr; mmWave Radar &rarr; Thermal IR &rarr; Safe Deceleration.
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6 ==================== -->
+    <section class="slide" id="slide-6">
+      <div class="slide-header">
+        <div class="slide-eyebrow">SLIDE 06 &bull; DEPLOYMENT, COMPLIANCE &amp; ROI</div>
+        <h1 class="slide-title">Hardware Roadmap, DGMS Standards &amp; Mine ROI</h1>
+        <p class="slide-subtitle">Ruggedized industrial deployment delivering uncompromised worker safety and rapid payback</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: var(--cyan-bright)">
+              <span>⚙️ Hardware Edge Stack</span>
+            </div>
+            <p class="card-desc">Field-ready industrial architecture for mining dumpers:</p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot"></span> <strong>Edge Compute:</strong> NVIDIA Jetson Orin Nano (40 TOPS) / AGX Orin</li>
+              <li><span class="bullet-dot"></span> <strong>Radar:</strong> Continental / TI 77 GHz IP69K FMCW Radar</li>
+              <li><span class="bullet-dot"></span> <strong>Thermal Core:</strong> FLIR Boson 640 LWIR in heated anti-dust housing</li>
+              <li><span class="bullet-dot"></span> <strong>V2V Telemetry:</strong> Quectel C-V2X 5.9 GHz + RTK DGPS</li>
+              <li><span class="bullet-dot"></span> <strong>Bus Interface:</strong> Dual CAN Bus (ISO 11898)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card safe-card">
+          <div>
+            <div class="card-title" style="color: var(--emerald-safe)">
+              <span>📜 Regulatory Compliance</span>
+            </div>
+            <p class="card-desc">Fully aligns with statutory Indian mining directives:</p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot green"></span> <strong>DGMS Circular Compliance:</strong> Meets DGMS (Tech) guidelines on proximity warning systems for HEMM.</li>
+              <li><span class="bullet-dot green"></span> <strong>ISO 21815:</strong> Earth-moving machinery &mdash; Collision warning and avoidance standard.</li>
+              <li><span class="bullet-dot green"></span> <strong>ISO 26262 ASIL-B:</strong> Functional safety architecture with sensor redundancy.</li>
+              <li><span class="bullet-dot green"></span> <strong>Retrofit-Ready:</strong> Plug-and-play on BEML, CAT, and Komatsu fleets.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-title" style="color: #f59e0b">
+              <span>💰 Rapid Economic ROI</span>
+            </div>
+            <p class="card-desc">Substantial operational gains and asset protection:</p>
+            <ul class="pill-list">
+              <li><span class="bullet-dot amber"></span> <strong>Zero Fog Shutdowns:</strong> Unlocks 40+ hours of winter fog production time, moving tens of thousands of extra ore tonnes.</li>
+              <li><span class="bullet-dot amber"></span> <strong>Avoided Losses:</strong> One avoided hauler collision saves &gt; ₹1.5 Cr in repair downtime.</li>
+              <li><span class="bullet-dot amber"></span> <strong>Payback Horizon:</strong> Full fleet deployment pays for itself in <strong>&lt; 6 months</strong>.</li>
+            </ul>
+          </div>
+          <div class="metric-badge" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); margin-top: 10px;">
+            <div class="metric-value" style="color: #f59e0b">&lt; 6 Months</div>
+            <div class="metric-label">Estimated Capital Payback</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 15px; font-size: 12px; color: var(--cyan-bright); font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+        <span>CONCLUSION: SMARTMINE transforms extreme weather from a shutdown risk into continuous, safe production.</span>
+        <span>Q&amp;A READY &bull; THANK YOU</span>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Speaker Notes Drawer (Bottom) -->
+  <div class="speaker-notes-drawer" id="speakerNotesDrawer">
+    <div class="notes-header">
+      <span class="notes-title" id="notesTitle">🎙️ SLIDE 1 PITCH SCRIPT (40 SECONDS)</span>
+      <span style="font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">Press 'N' to close</span>
+    </div>
+    <div class="notes-content" id="notesContent">
+      "Respected jury members, in heavy open-cast mining, production cannot afford to stop, but neither can safety be compromised. Welcome to SMARTMINE, our dedicated response to NMDC Problem Statement 26007. During winter mornings and monsoon thermal inversions, visibility on haul roads drops to zero, turning massive 100-tonne dumpers into blind hazards. SMARTMINE provides an AI-powered multi-sensor safety shield that pierces through dense fog using mmWave radar, thermal infrared, physics-based collision modeling, and V2V mesh telemetry. Let us show you how we solve the critical sight-distance paradox in modern mining."
+    </div>
+  </div>
+
+  <!-- Benefits Modal -->
+  <div id="benefitsModal" class="benefits-modal" onclick="if(event.target === this) closeBenefitsModal()">
+    <div class="benefits-modal-content">
+      <div class="benefits-modal-header">
+        <div class="tab-group">
+          <button id="tab1Btn" class="tab-btn active" onclick="switchBenefitsTab(1)">1. 4 Core Benefits Infographic</button>
+          <button id="tab2Btn" class="tab-btn" onclick="switchBenefitsTab(2)">2. Operational Impact: Without vs. With SMARTMINE</button>
+        </div>
+        <button class="modal-close-btn" onclick="closeBenefitsModal()">&times;</button>
+      </div>
+      <div class="benefits-image-container">
+        <img id="benefitsImg1" src="benefits_images/1_smartmine_core_benefits.jpg" alt="SMARTMINE Core Benefits" class="benefit-img active" />
+        <img id="benefitsImg2" src="benefits_images/2_smartmine_before_vs_after.jpg" alt="Without vs With SMARTMINE" class="benefit-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Navigation -->
+  <footer class="deck-footer">
+    <div id="slideCounter">SLIDE 01 / 06</div>
+    <div class="nav-buttons">
+      <button class="nav-btn" id="prevBtn" onclick="prevSlide()" disabled>&larr; Previous</button>
+      <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next &rarr;</button>
+    </div>
+  </footer>
+
+  <script>
+    const totalSlides = 6;
+    let currentSlide = 1;
+    let notesOpen = false;
+
+    const pitchScripts = [
+      {
+        title: "🎙️ SLIDE 1 PITCH SCRIPT (40 SECONDS)",
+        text: "\"Respected jury members, in heavy open-cast mining, production cannot afford to stop, but neither can safety be compromised. Welcome to SMARTMINE, our dedicated response to NMDC Problem Statement 26007. During winter mornings and monsoon thermal inversions, visibility on haul roads drops to zero, turning massive 100-tonne dumpers into blind hazards. SMARTMINE provides an AI-powered multi-sensor safety shield that pierces through dense fog using mmWave radar, thermal infrared, physics-based collision modeling, and V2V mesh telemetry. Let us show you how we solve the critical sight-distance paradox in modern mining.\""
+      },
+      {
+        title: "🎙️ SLIDE 2 PITCH SCRIPT (45 SECONDS)",
+        text: "\"Judges, let's address the harsh ground reality of Bailadila and Kirandul open-cast pits. In severe winter fog, human drivers cannot see past 4 meters. However, an 85-tonne haul truck cruising at 30 km/h on an unpaved ramp requires at least 18 to 22 meters of stopping distance. This is the Sight-Distance Paradox: the driver is physically blind to hazards that are already within their fatal stopping zone! When optical cameras fail and LiDAR gets blinded by moisture backscatter, ordinary safety systems collapse. A single collision causes crores in machine write-offs, production bottlenecks, and tragic loss of human life. Mining demands an all-weather, non-optical perception paradigm.\""
+      },
+      {
+        title: "🎙️ SLIDE 3 PITCH SCRIPT (45 SECONDS)",
+        text: "\"To solve this, SMARTMINE implements a 4-tier redundant perception network. We do not rely on any single sensor. First, an automotive 77 GHz mmWave radar pierces right through water droplets and dust to track distance and Doppler closing speed up to 150 meters. Second, a FLIR thermal infrared camera captures the heat signatures of running engines and human workers invisible to the naked eye. Third, an RGB camera runs edge computer vision for object classification. And fourth, our 5.9 GHz V2V mesh shares sub-meter RTK-GPS coordinates between all fleet vehicles in real time. If heavy fog completely blinds the RGB camera, our sensor fusion algorithm dynamically transitions authority to Radar and Thermal without missing a single millisecond.\""
+      },
+      {
+        title: "🎙️ SLIDE 4 PITCH SCRIPT (45 SECONDS)",
+        text: "\"Existing collision warning systems fail in mines because they use dumb proximity thresholds that cause alarm fatigue. SMARTMINE introduces a Physics-Aware Collision Risk Engine. Our engine calculates stopping distance in real time by factoring in vehicle mass, vehicle speed, driver reaction time of 1.5 seconds, unpaved road friction degraded by fog moisture, and haul road slope gradient. By calculating exact Time-to-Collision (TTC), SMARTMINE categorizes risks into four dynamic tiers: Safe, Caution, High Risk, and Critical. It only alerts the operator when an unavoidable physics trajectory requires action, eliminating false alarms while giving drivers life-saving reaction seconds.\""
+      },
+      {
+        title: "🎙️ SLIDE 5 PITCH SCRIPT (45 SECONDS)",
+        text: "\"We built SMARTMINE as a complete end-to-end platform with a two-tiered interface. Inside the heavy dumper cabin, the driver has a high-contrast HUD and hands-free text-to-speech voice alerts. When visibility drops to 4 meters, the driver hears: 'Warning! Dumper ahead 11.8 meters in severe fog! Emergency decelerate!' Simultaneously, our Central Command Center provides a real-time Digital Twin of the entire mine pit over WebSockets. Dispatchers can monitor vehicle trajectories, pinpoint fog hot-spots, and track automated alerts. Our working prototype includes a full 14-step scenario player that demonstrates this exact sequence live.\""
+      },
+      {
+        title: "🎙️ SLIDE 6 PITCH SCRIPT (45 SECONDS)",
+        text: "\"To bring SMARTMINE to NMDC's actual production fleet, we have architected an industrial-grade hardware roadmap. Powered by NVIDIA Jetson edge compute, IP69K-rated mmWave radar over CAN Bus, and FLIR thermal cores, the system is designed to plug directly into existing BEML, CAT, and Komatsu trucks without mechanical overhaul. It fully aligns with DGMS HEMM safety guidelines and ISO 21815 collision avoidance standards. Financially, by preventing even a single collision and eliminating costly fog-related work stoppages, SMARTMINE pays for itself within six months. SMARTMINE bridges the gap between extreme nature and relentless mining productivity. Thank you, and we welcome your questions!\""
+      }
+    ];
+
+    function updateSlide(newIndex) {
+      if (newIndex < 1 || newIndex > totalSlides) return;
+      
+      document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+      currentSlide = newIndex;
+      document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+      // Update progress bar
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      // Update counter and buttons
+      document.getElementById('slideCounter').textContent = `SLIDE 0${currentSlide} / 0${totalSlides}`;
+      document.getElementById('prevBtn').disabled = currentSlide === 1;
+      document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+
+      // Update notes
+      document.getElementById('notesTitle').textContent = pitchScripts[currentSlide - 1].title;
+      document.getElementById('notesContent').textContent = pitchScripts[currentSlide - 1].text;
+    }
+
+    function prevSlide() { updateSlide(currentSlide - 1); }
+    function nextSlide() { updateSlide(currentSlide + 1); }
+
+    function toggleNotes() {
+      notesOpen = !notesOpen;
+      const drawer = document.getElementById('speakerNotesDrawer');
+      const btn = document.getElementById('notesToggleBtn');
+      if (notesOpen) {
+        drawer.classList.add('open');
+        btn.classList.add('active');
+      } else {
+        drawer.classList.remove('open');
+        btn.classList.remove('active');
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    function openBenefitsModal(tabIndex = 1) {
+      document.getElementById('benefitsModal').classList.add('open');
+      switchBenefitsTab(tabIndex);
+    }
+
+    function closeBenefitsModal() {
+      document.getElementById('benefitsModal').classList.remove('open');
+    }
+
+    function switchBenefitsTab(tabIndex) {
+      const img1 = document.getElementById('benefitsImg1');
+      const img2 = document.getElementById('benefitsImg2');
+      const btn1 = document.getElementById('tab1Btn');
+      const btn2 = document.getElementById('tab2Btn');
+
+      if (tabIndex === 1) {
+        img1.classList.add('active');
+        img2.classList.remove('active');
+        btn1.classList.add('active');
+        btn2.classList.remove('active');
+      } else {
+        img1.classList.remove('active');
+        img2.classList.add('active');
+        btn1.classList.remove('active');
+        btn2.classList.add('active');
+      }
+    }
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'i' || e.key === 'I') {
+        const modal = document.getElementById('benefitsModal');
+        if (modal.classList.contains('open')) closeBenefitsModal();
+        else openBenefitsModal(1);
+      } else if (e.key === 'Escape') {
+        closeBenefitsModal();
+      }
+    });
+  </script>
+</body>
+</html>

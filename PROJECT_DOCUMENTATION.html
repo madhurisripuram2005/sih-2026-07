@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMARTMINE — Complete Technical Documentation & QR Code Hub (NMDC #26007)</title>
+  <style>
+    :root {
+      --bg-dark: #080c15;
+      --bg-card: #0f172a;
+      --bg-card-alt: #131d35;
+      --border-subtle: #1e293b;
+      --border-accent: #0284c7;
+      --cyan-bright: #38bdf8;
+      --cyan-primary: #06b6d4;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Top Sticky Header */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 12, 21, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-hackathon {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan-bright);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(2, 132, 199, 0.35);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1, #0891b2);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: var(--text-main);
+      border: 1px solid #334155;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+    }
+
+    .btn-emerald {
+      background: #059669;
+      color: #ffffff;
+    }
+    .btn-emerald:hover {
+      background: #047857;
+    }
+
+    /* Container */
+    .doc-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 36px;
+    }
+
+    @media (max-width: 960px) {
+      .doc-container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-nav {
+        display: none;
+      }
+    }
+
+    /* Sidebar Navigation */
+    .sidebar-nav {
+      position: sticky;
+      top: 85px;
+      height: fit-content;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      padding-right: 12px;
+    }
+
+    .sidebar-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 7px 12px;
+      border-radius: 6px;
+      display: block;
+      transition: all 0.15s ease;
+      border-left: 2px solid transparent;
+    }
+
+    .nav-list a:hover {
+      color: var(--cyan-bright);
+      background: rgba(2, 132, 199, 0.1);
+      border-left-color: var(--cyan-bright);
+    }
+
+    /* Content Area */
+    .content-area {
+      min-width: 0;
+    }
+
+    /* Hero QR Hub Banner */
+    .qr-hero-card {
+      background: linear-gradient(145deg, #0f172a, #131e3b);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qr-hero-card::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-header {
+      margin-bottom: 24px;
+    }
+
+    .hero-header h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .hero-header p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 780px;
+    }
+
+    .qr-grid-interactive {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .qr-grid-interactive {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .qr-card-box {
+      background: #080d1a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .qr-card-box:hover {
+      border-color: var(--border-accent);
+    }
+
+    .qr-box-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .tag-blue {
+      background: rgba(2, 132, 199, 0.2);
+      color: var(--cyan-bright);
+      border: 1px solid rgba(2, 132, 199, 0.4);
+    }
+
+    .tag-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .qr-img-wrapper {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 12px 0 16px 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      display: inline-block;
+    }
+
+    .qr-img-wrapper img {
+      display: block;
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+    }
+
+    .qr-card-box h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .qr-card-box p {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      margin-bottom: 16px;
+    }
+
+    .qr-url-chip {
+      background: #1e293b;
+      color: var(--cyan-bright);
+      font-family: monospace;
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      word-break: break-all;
+      border: 1px solid #334155;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      border-radius: 6px;
+    }
+
+    /* Live QR Configurator Box */
+    .qr-configurator {
+      background: #080d1a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .config-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--amber);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .custom-url-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .custom-input {
+      flex: 1;
+      background: #131d35;
+      border: 1px solid #223253;
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-family: monospace;
+    }
+
+    .custom-input:focus {
+      outline: none;
+      border-color: var(--cyan-primary);
+    }
+
+    /* Documentation Sections */
+    .doc-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .section-tag {
+      color: var(--cyan-bright);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .doc-section p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .doc-section h3 {
+      color: #ffffff;
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin: 24px 0 10px 0;
+    }
+
+    /* Callout Alert Boxes */
+    .alert-box {
+      border-left: 4px solid var(--cyan-primary);
+      background: rgba(6, 182, 212, 0.08);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+
+    .alert-box.amber {
+      border-left-color: var(--amber);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .alert-box.emerald {
+      border-left-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .alert-box strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+    }
+
+    .alert-box p {
+      margin-bottom: 0;
+      font-size: 0.88rem;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th {
+      background: #162035;
+      color: var(--cyan-bright);
+      padding: 12px 16px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    /* Math Formula Block */
+    .formula-card {
+      background: #080d1a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 18px 24px;
+      margin: 16px 0;
+      font-family: monospace;
+      font-size: 0.92rem;
+      color: var(--cyan-bright);
+      line-height: 1.7;
+    }
+
+    .formula-explanation {
+      margin-top: 10px;
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #050811;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 0.84rem;
+      color: #e2e8f0;
+      margin: 16px 0;
+    }
+
+    code {
+      font-family: monospace;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan-bright);
+    }
+
+    /* Grid for Feature Cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .feature-box {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .feature-box h4 {
+      color: #ffffff;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-box p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Presentation Card Banner Embedded */
+    .card-banner-embed {
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .card-banner-embed img {
+      max-width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+      font-size: 0.84rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .top-navbar, .sidebar-nav, .header-actions, .qr-configurator, .button-group, footer {
+        display: none !important;
+      }
+      .doc-container {
+        display: block !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .doc-section, .qr-hero-card {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 24px !important;
+      }
+      h1, h2, h3, h4, .section-title {
+        color: #000000 !important;
+      }
+      th {
+        background: #f1f5f9 !important;
+        color: #000000 !important;
+      }
+      td, p, li {
+        color: #333333 !important;
+      }
+      .formula-card, pre {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      .qr-img-wrapper {
+        box-shadow: none !important;
+        border: 1px solid #cccccc !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="top-navbar">
+    <div class="brand-title">
+      <span>SMARTMINE</span>
+      <span class="badge-hackathon">NMDC Hackathon #26007</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary" onclick="window.print()">
+        🖨️ Print / Save PDF
+      </button>
+      <a href="#qr-hub" class="btn btn-primary">
+        📱 Scan QR Code
+      </a>
+      <a href="http://localhost:5173" target="_blank" class="btn btn-emerald">
+        🚀 Launch Dashboard
+      </a>
+    </div>
+  </header>
+
+  <div class="doc-container">
+
+    <!-- Left Sticky Sidebar -->
+    <aside class="sidebar-nav">
+      <div class="sidebar-title">Table of Contents</div>
+      <ul class="nav-list">
+        <li><a href="#qr-hub">📱 QR Code Mobile Hub</a></li>
+        <li><a href="#exec-summary">1. Executive Summary</a></li>
+        <li><a href="#problem-analysis">2. Operational Fog Problem</a></li>
+        <li><a href="#architecture">3. System Architecture</a></li>
+        <li><a href="#formulas">4. Mathematical Formulas</a></li>
+        <li><a href="#hardware-bom">5. Hardware BOM & Edge Specs</a></li>
+        <li><a href="#software-stack">6. Software & REST APIs</a></li>
+        <li><a href="#fleet-specs">7. Fleet Telemetry Profiles</a></li>
+        <li><a href="#demo-walkthrough">8. 14-Step Demo Scenario</a></li>
+        <li><a href="#quickstart">9. Quick Start & Setup</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- HERO QR CODE HUB -->
+      <section id="qr-hub" class="qr-hero-card">
+        <div class="hero-header">
+          <span class="badge-hackathon">Mobile Document Verification</span>
+          <h1 style="margin-top: 10px;">SMARTMINE Project Documentation QR Code</h1>
+          <p>
+            Scan either QR code with your smartphone camera to access the complete technical dossier,
+            mathematical models, hardware specifications, and system architecture.
+          </p>
+        </div>
+
+        <div class="qr-grid-interactive">
+          <!-- QR Card 1: Interactive Web Portal -->
+          <div class="qr-card-box">
+            <span class="qr-box-tag tag-blue">Option A: Interactive Web Portal</span>
+            <div class="qr-img-wrapper">
+              <img id="qr-img-portal" src="documentation_qr_portal.png" alt="SMARTMINE Web Documentation Portal QR Code" />
+            </div>
+            <h3>Scan for Web Portal</h3>
+            <p>Opens the full interactive responsive documentation, charts, and API explorer directly on your mobile device.</p>
+            <div class="qr-url-chip" id="portal-url-display">http://10.134.196.170:8000/documentation.html</div>
+            <div class="button-group">
+              <a href="documentation_qr_portal.png" download="smartmine_web_portal_qr.png" class="btn btn-primary btn-sm">Download PNG</a>
+              <a href="documentation_qr_portal.svg" download="smartmine_web_portal_qr.svg" class="btn btn-secondary btn-sm">Download SVG</a>
+              <button onclick="copyToClipboard('http://10.134.196.170:8000/documentation.html')" class="btn btn-secondary btn-sm">Copy Link</button>
+            </div>
+          </div>
+
+          <!-- QR Card 2: Direct Offline Plaintext Dossier -->
+          <div class="qr-card-box">
+            <span class="qr-box-tag tag-green">Option B: 100% Offline Direct Dossier</span>
+            <div class="qr-img-wrapper">
+              <img id="qr-img-dossier" src="documentation_qr_dossier.png" alt="SMARTMINE Offline Direct Text Dossier QR Code" />
+            </div>
+            <h3>Scan for Instant Text Dossier</h3>
+            <p>Encodes the full engineering summary directly into the QR code. Reads in camera app with zero internet required!</p>
+            <div class="qr-url-chip" style="color: var(--emerald);">Direct Text • Zero Network Required</div>
+            <div class="button-group">
+              <a href="documentation_qr_dossier.png" download="smartmine_offline_dossier_qr.png" class="btn btn-primary btn-sm">Download PNG</a>
+              <a href="documentation_qr_dossier.svg" download="smartmine_offline_dossier_qr.svg" class="btn btn-secondary btn-sm">Download SVG</a>
+              <button onclick="copyDossierText()" class="btn btn-secondary btn-sm">Copy Dossier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom URL Live Generator -->
+        <div class="qr-configurator">
+          <div class="config-title">
+            <span>⚙️</span> Dynamic QR Code URL Customizer (For Deployed Links / Vercel / GitHub)
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+            Want to point the QR code to your custom public URL, ngrok tunnel, or cloud deployment? Type the URL below to regenerate instantly:
+          </p>
+          <div class="custom-url-row">
+            <input type="text" id="custom-url-input" class="custom-input" placeholder="e.g. https://your-project.vercel.app or http://192.168.1.100:8000/documentation.html" value="http://10.134.196.170:8000/documentation.html" />
+            <button onclick="updateCustomQR()" class="btn btn-primary btn-sm">Generate QR</button>
+          </div>
+        </div>
+
+        <!-- Presentation Banner Card Preview -->
+        <div class="card-banner-embed">
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+            Full Presentation Poster / Slide Banner (Right-click to copy or download):
+          </p>
+          <img src="smartmine_project_documentation_card.png" alt="SMARTMINE Presentation Card" />
+          <div style="margin-top: 12px;">
+            <a href="smartmine_project_documentation_card.png" download="smartmine_project_documentation_card.png" class="btn btn-secondary btn-sm">
+              📥 Download Full High-Res Presentation Card (1600x980 PNG)
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: EXECUTIVE SUMMARY -->
+      <section id="exec-summary" class="doc-section">
+        <div class="section-tag">Section 1.0</div>
+        <h2 class="section-title">Executive Summary</h2>
+        <p>
+          <strong>SMARTMINE</strong> is an integrated multi-sensor edge AI and wireless vehicle-to-vehicle (V2V) collision avoidance system
+          developed for open-cast iron ore mining operations. Designed specifically to solve the severe visibility blinding caused by
+          monsoon thermal inversions and winter morning fog, SMARTMINE safeguards heavy haul dumpers ($85\text{t}–120\text{t}$),
+          excavators, light utility vehicles, and ground personnel.
+        </p>
+        <div class="alert-box emerald">
+          <strong>Key Innovation Highlight: Multi-Sensor Fusion Dominance</strong>
+          <p>
+            Unlike conventional ADAS systems that rely exclusively on visual cameras or LiDAR (which fail completely in thick fog and dust),
+            SMARTMINE utilizes a <strong>77 GHz mmWave FMCW Radar</strong> and <strong>FLIR LWIR Thermal Infrared</strong> sensor fusion pipeline
+            that pierces 100% opaque fog particulate layers while dynamically computing physical stopping distances based on real-time haul road wetness and slope gradients.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-box">
+            <h4>🎯 NMDC Statement #26007</h4>
+            <p>Autonomous fog safety & mine vehicle collision avoidance for heavy industrial mining environments.</p>
+          </div>
+          <div class="feature-box">
+            <h4>⚡ 5 Hz Live Telemetry</h4>
+            <p>Real-time WebSockets streaming between simulated dumper fleet, edge processing nodes, and central control.</p>
+          </div>
+          <div class="feature-box">
+            <h4>🔊 In-Cab Speech HUD</h4>
+            <p>Voice synthesized situational warnings + 95dB directional audio alert when collision risk enters critical tier.</p>
+          </div>
+          <div class="feature-box">
+            <h4>🛡️ Physics Risk Engine</h4>
+            <p>Real-time calculation of reaction distance, wet unpaved road braking friction ($\mu_{\text{eff}}$), and Time-To-Collision (TTC).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: OPERATIONAL PROBLEM ANALYSIS -->
+      <section id="problem-analysis" class="doc-section">
+        <div class="section-tag">Section 2.0</div>
+        <h2 class="section-title">Operational Fog Problem in Open-Cast Mining</h2>
+        <p>
+          In deep open-cast mines such as NMDC’s Bailadila, Kirandul, and Donimalai complexes, morning fog and monsoon inversions
+          trap dense moisture and fugitive ore dust in the pit floor. Human drivers in high-cab dumpers suffer severe visual blinding:
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Operational Metric</th>
+                <th>Standard Clear Conditions</th>
+                <th>Severe Fog / Monsoon Blinding</th>
+                <th>Hazard Consequence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Visual Sight Line</strong></td>
+                <td>80 – 120 meters</td>
+                <td><strong>3 – 5 meters</strong></td>
+                <td>Driver cannot see preceding vehicles or workers until impact.</td>
+              </tr>
+              <tr>
+                <td><strong>Haul Truck Speed</strong></td>
+                <td>25 – 35 km/h</td>
+                <td>15 – 25 km/h (reduced)</td>
+                <td>Even at 20 km/h, kinetic energy of 100t mass exceeds braking limits.</td>
+              </tr>
+              <tr>
+                <td><strong>Stopping Distance (100t)</strong></td>
+                <td>12 – 16 meters</td>
+                <td><strong>18 – 26 meters</strong></td>
+                <td><strong>Stopping distance exceeds sight line by 400% to 600%!</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Road Friction ($\mu$)</strong></td>
+                <td>0.65 (Dry compact dirt)</td>
+                <td>0.35 – 0.43 (Moist slurry)</td>
+                <td>Tire slippage on steep 8% to 10% pit ramps.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert-box amber">
+          <strong>The Physical Impossibility: Stopping Distance > Visibility</strong>
+          <p>
+            When visual sight line is 4 meters, but a 100-tonne dumper moving at 25 km/h requires 22 meters to stop, human reaction
+            alone is mathematically incapable of preventing rear-end collisions. <strong>Active non-optical sensing is mandatory.</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 3: SYSTEM ARCHITECTURE -->
+      <section id="architecture" class="doc-section">
+        <div class="section-tag">Section 3.0</div>
+        <h2 class="section-title">System Architecture & Multi-Sensor Perception</h2>
+        <p>
+          SMARTMINE’s edge architecture combines complementary electromagnetic spectrum modalities to eliminate single-point perception failure:
+        </p>
+        <pre>
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              SMARTMINE PERCEPTION LAYER                                │
+├───────────────────┬───────────────────┬───────────────────┬────────────────────────────┤
+│  RGB AI Camera    │ 77 GHz mmWave     │ FLIR LWIR Thermal │ 5.9 GHz V2V Mesh & RTK GPS │
+│  (Daylight Vision)│ (Fog Penetrating) │ (Heat Signatures) │ (Centimeter Cooperative)   │
+└─────────┬─────────┴─────────┬─────────┴─────────┬─────────┴──────────────┬─────────────┘
+          │                   │                   │                        │
+          └───────────────────┼───────────────────┴────────────────────────┘
+                              ▼
+        ┌─────────────────────────────────────────────────────────┐
+        │  MULTI-SENSOR BAYESIAN FUSION & KALMAN FILTER NODE      │
+        │  d_fused = Σ(w_i * d_i) / Σ(w_i)                        │
+        │  Camera weight drops in fog; Radar & Thermal dominate   │
+        └───────────────────────────┬─────────────────────────────┘
+                                    ▼
+        ┌─────────────────────────────────────────────────────────┐
+        │  DYNAMIC PHYSICS COLLISION RISK ENGINE                  │
+        │  Calculates d_stop, effective friction μ, TTC           │
+        └──────────────┬────────────────────────────┬─────────────┘
+                       ▼                            ▼
+        ┌──────────────────────────────┐  ┌──────────────────────────────────┐
+        │  IN-CAB DRIVER HUD & AUDIO   │  │  CENTRAL MINE COMMAND CENTER     │
+        │  • LED Warning Matrix        │  │  • 5 Hz WebSockets Fleet Map     │
+        │  • Voice Synthesized Warning │  │  • SQL Audit Trail & Dispatch    │
+        │  • 95dB Directional Buzzer   │  │  • Automated Scenario Orchestrator│
+        └──────────────────────────────┘  └──────────────────────────────────┘
+        </pre>
+
+        <h3>Sensor Modality Breakdown</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Sensor Modality</th>
+                <th>Operational Spectrum</th>
+                <th>Behavior in Zero-Visibility Fog</th>
+                <th>Primary Role in System</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>77 GHz mmWave Radar</strong></td>
+                <td>3.9 mm wavelength FMCW</td>
+                <td><strong>Unaffected (0% degradation)</strong></td>
+                <td>Direct Doppler distance and relative speed measurement.</td>
+              </tr>
+              <tr>
+                <td><strong>FLIR Thermal IR</strong></td>
+                <td>8 – 14 µm Long-Wave IR</td>
+                <td><strong>90%+ transmission through fog</strong></td>
+                <td>Classifies human body heat (37°C) & engine blocks (85°C–120°C).</td>
+              </tr>
+              <tr>
+                <td><strong>Sony HDR RGB Camera</strong></td>
+                <td>380 – 750 nm Visual Band</td>
+                <td><strong>Degrades exponentially</strong> to &lt;10%</td>
+                <td>Bounding box classification during clear day conditions.</td>
+              </tr>
+              <tr>
+                <td><strong>RTK DGPS & V2V Mesh</strong></td>
+                <td>5.9 GHz C-V2X (10 Hz)</td>
+                <td><strong>100% reliable all-weather</strong></td>
+                <td>Broadcasts vehicle mass, speed, GPS vector, and brake state.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 4: MATHEMATICAL FORMULATIONS -->
+      <section id="formulas" class="doc-section">
+        <div class="section-tag">Section 4.0</div>
+        <h2 class="section-title">Mathematical Formulations & Algorithms</h2>
+
+        <h3>1. Multi-Sensor Fusion Weighted Model</h3>
+        <div class="formula-card">
+          d_fused = [ (w_cam · d_cam) + (w_rad · d_rad) + (w_therm · d_therm) + (w_gps · d_gps) ] / [ w_cam + w_rad + w_therm + w_gps ]
+          <div class="formula-explanation">
+            where camera weight decays exponentially with fog ratio:
+            <br />
+            <strong>w_cam = 95.0 · exp(-3.2 · fog_ratio)</strong> &nbsp;&nbsp;(drops from 95.0% down to 3.8% in dense fog)
+            <br />
+            <strong>w_rad ≥ 90.0%</strong> &nbsp;&nbsp;(dominates perception during fog conditions)
+          </div>
+        </div>
+
+        <h3>2. Dynamic Physics Stopping Distance Formulation</h3>
+        <div class="formula-card">
+          d_stop = d_reaction + d_braking = (v · t_reaction) + [ v² / (2 · μ_eff · g) ]
+          <div class="formula-explanation">
+            • <strong>v</strong>: Vehicle speed in m/s (speed_kmh / 3.6)<br />
+            • <strong>t_reaction</strong>: 1.5 seconds standard heavy dumper operator reaction time<br />
+            • <strong>g</strong>: Gravitational acceleration (9.81 m/s²)<br />
+            • <strong>μ_eff</strong>: Effective friction coefficient dynamically adjusted for fog moisture, road slope, and mass:
+          </div>
+        </div>
+
+        <div class="formula-card">
+          μ_eff = max(0.20, μ_base - Δμ_wet(fog) + sin(θ_slope) - Δμ_mass)
+          <div class="formula-explanation">
+            • <strong>μ_base</strong> = 0.65 (unpaved dry haul road)<br />
+            • <strong>Δμ_wet</strong> = fog_ratio · 0.22 (up to 0.22 friction reduction due to wet moisture film)<br />
+            • <strong>sin(θ_slope)</strong> = downhill grade penalty (e.g. -2° slope reduces effective braking force)<br />
+            • <strong>Δμ_mass</strong> = (mass_tonnes - 30.0) · 0.001 (heavier loaded trucks suffer extended slide)
+          </div>
+        </div>
+
+        <h3>3. Collision Risk Evaluation & Time-To-Collision (TTC)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Risk Tier</th>
+                <th>Distance Condition</th>
+                <th>TTC Threshold</th>
+                <th>System Action & Alerts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: var(--emerald);">SAFE</strong></td>
+                <td>d_fused &gt; 2.0 · d_stop</td>
+                <td>TTC &gt; 6.0s</td>
+                <td>Green HUD indicator. Normal cruise speed allowed.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--cyan-bright);">CAUTION</strong></td>
+                <td>1.3 · d_stop &lt; d_fused ≤ 2.0 · d_stop</td>
+                <td>4.0s &lt; TTC ≤ 6.0s</td>
+                <td>Yellow HUD indicator. Advisory speed reduction prompt.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--amber);">WARNING</strong></td>
+                <td>1.0 · d_stop &lt; d_fused ≤ 1.3 · d_stop</td>
+                <td>2.5s &lt; TTC ≤ 4.0s</td>
+                <td>Orange pulsing HUD. Soft audio chime. Deceleration mandated.</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--rose);">CRITICAL</strong></td>
+                <td>d_fused ≤ 1.0 · d_stop</td>
+                <td>TTC ≤ 2.5s</td>
+                <td><strong>Red flashing HUD, 95dB siren, voice synthesized warning, auto-alert to command center.</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 5: HARDWARE BILL OF MATERIALS -->
+      <section id="hardware-bom" class="doc-section">
+        <div class="section-tag">Section 5.0</div>
+        <h2 class="section-title">Hardware Bill of Materials (BOM) & Edge Specs</h2>
+        <p>
+          SMARTMINE is designed for retrofitting existing heavy dumper fleets without requiring structural alterations:
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Industrial Model</th>
+                <th>Interface</th>
+                <th>Rating</th>
+                <th>Est. Unit Cost (INR)</th>
+                <th>Est. Unit Cost (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Edge Computing Node</strong></td>
+                <td>NVIDIA Jetson Orin Nano 8GB</td>
+                <td>Gigabit Ethernet / USB 3.2</td>
+                <td>IP67 Enclosure (-25°C to 70°C)</td>
+                <td>₹52,000</td>
+                <td>$625</td>
+              </tr>
+              <tr>
+                <td><strong>77 GHz mmWave Radar</strong></td>
+                <td>Continental ARS408-21 FMCW</td>
+                <td>Dual CAN 2.0B / CAN-FD</td>
+                <td>IP69K, shock 50G</td>
+                <td>₹68,000</td>
+                <td>$815</td>
+              </tr>
+              <tr>
+                <td><strong>FLIR Thermal IR Core</strong></td>
+                <td>FLIR Boson 640×512 (60 Hz)</td>
+                <td>USB-C / MIPI-CSI</td>
+                <td>IP67 Sealed Germanium Lens</td>
+                <td>₹74,000</td>
+                <td>$890</td>
+              </tr>
+              <tr>
+                <td><strong>V2V & RTK GNSS</strong></td>
+                <td>Cohda MK6c + u-blox ZED-F9P</td>
+                <td>5.9 GHz DSRC / C-V2X</td>
+                <td>IP67 Rugged Dome Antenna</td>
+                <td>₹32,000</td>
+                <td>$385</td>
+              </tr>
+              <tr>
+                <td><strong>In-Cab Touch HUD</strong></td>
+                <td>7-inch 1000-nit Sunlight Display</td>
+                <td>CAN-Bus / HDMI</td>
+                <td>Mil-Std 810G vibration</td>
+                <td>₹16,000</td>
+                <td>$195</td>
+              </tr>
+              <tr>
+                <td><strong>Cabling & Power Unit</strong></td>
+                <td>24V-to-12V Isolated Converter</td>
+                <td>M12 Industrial Connectors</td>
+                <td>Heavy Duty Flame Retardant</td>
+                <td>₹8,000</td>
+                <td>$95</td>
+              </tr>
+              <tr style="background: rgba(2, 132, 199, 0.1); font-weight: 700;">
+                <td colspan="4" style="color: #ffffff;">TOTAL ESTIMATED RETROFIT COST PER TRUCK</td>
+                <td style="color: var(--cyan-bright);">₹2,50,000</td>
+                <td style="color: var(--cyan-bright);">$3,005</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-dim);">
+          * Economic Context: A single BEML/CAT 100-tonne haul truck costs approximately ₹6.5 Crore (~$800,000 USD).
+          A ₹2.5 Lakh retrofit represents <strong>less than 0.4%</strong> of vehicle asset value, protecting lives and equipment.
+        </p>
+      </section>
+
+      <!-- SECTION 6: SOFTWARE ARCHITECTURE & REST APIS -->
+      <section id="software-stack" class="doc-section">
+        <div class="section-tag">Section 6.0</div>
+        <h2 class="section-title">Software Stack & REST API Specification</h2>
+        <div class="feature-grid">
+          <div class="feature-box">
+            <h4>Backend (Python 3.12)</h4>
+            <p>FastAPI, Uvicorn, WebSockets (5 Hz), SQLite3 audit database, Pydantic v2 schemas.</p>
+          </div>
+          <div class="feature-box">
+            <h4>Frontend (TypeScript)</h4>
+            <p>React 19, Vite 8, TailwindCSS 4, Lucide Icons, Recharts, HTML5 Web Speech Audio.</p>
+          </div>
+        </div>
+
+        <h3>REST API Endpoints</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th>Response Payload</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>/api/status</code></td>
+                <td>Overall system telemetry, fog level, and fleet count.</td>
+                <td><code>{"status": "ONLINE", "fog_level": 15.0, ...}</code></td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/fog</code></td>
+                <td>Update environmental fog density percentage (0–100%).</td>
+                <td><code>{"status": "UPDATED", "fog_level": 85.0}</code></td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/scenario/start</code></td>
+                <td>Triggers the automated 14-step hackathon demo scenario.</td>
+                <td><code>{"status": "DEMO_STARTED"}</code></td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/scenario/reset</code></td>
+                <td>Resets simulation to clear nominal mine operations.</td>
+                <td><code>{"status": "SUCCESS"}</code></td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>/api/alerts</code></td>
+                <td>Fetches logged safety alert incidents from SQLite.</td>
+                <td><code>[{"id": 1, "vehicle_id": "V103", ...}]</code></td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/alerts/{id}/ack</code></td>
+                <td>Acknowledges an active alert in Command Center.</td>
+                <td><code>{"status": "ACKNOWLEDGED"}</code></td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>/documentation.html</code></td>
+                <td>Serves this comprehensive technical documentation portal.</td>
+                <td><code>text/html</code></td>
+              </tr>
+              <tr>
+                <td><code>WS</code></td>
+                <td><code>/ws/telemetry</code></td>
+                <td>5 Hz bi-directional WebSocket telemetry broadcast stream.</td>
+                <td>Full fleet state vector JSON array.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 7: FLEET TELEMETRY PROFILES -->
+      <section id="fleet-specs" class="doc-section">
+        <div class="section-tag">Section 7.0</div>
+        <h2 class="section-title">Fleet Telemetry & Vehicle Profiles</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle ID</th>
+                <th>Model</th>
+                <th>Vehicle Type</th>
+                <th>Mass / Payload</th>
+                <th>Sensor Suite</th>
+                <th>Role in Demo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>V101</strong></td>
+                <td>CAT 777D</td>
+                <td>Heavy Haul Dumper</td>
+                <td>95 Tonnes</td>
+                <td>Radar + Camera + V2V</td>
+                <td>Preceding Ore Hauler on Ramp 1</td>
+              </tr>
+              <tr>
+                <td><strong>V102</strong></td>
+                <td>Komatsu HD785</td>
+                <td>Heavy Haul Dumper</td>
+                <td>100 Tonnes</td>
+                <td>Radar + Camera + V2V</td>
+                <td>Nominal Pit Transit</td>
+              </tr>
+              <tr>
+                <td><strong>V103</strong></td>
+                <td>BEML BH100</td>
+                <td>Heavy Haul Dumper</td>
+                <td>100 Tonnes</td>
+                <td>Full SmartMine Suite (Radar+Thermal+AI+V2V)</td>
+                <td><strong>Primary Demo Truck (Encounters Dense Fog Pass)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>V104</strong></td>
+                <td>Tata Light Service</td>
+                <td>Patrol Vehicle</td>
+                <td>3.5 Tonnes</td>
+                <td>V2V Beacon + DGPS</td>
+                <td>Haul Road Safety Inspection Patrol</td>
+              </tr>
+              <tr>
+                <td><strong>V105</strong></td>
+                <td>Komatsu PC2000</td>
+                <td>Hydraulic Shovel</td>
+                <td>200 Tonnes</td>
+                <td>Stationary V2V Beacon</td>
+                <td>Loading Bench #4 Station</td>
+              </tr>
+              <tr>
+                <td><strong>V106</strong></td>
+                <td>CAT 777D</td>
+                <td>Heavy Haul Dumper</td>
+                <td>95 Tonnes</td>
+                <td>Radar + Camera + V2V</td>
+                <td>Crusher Return Route</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 8: 14-STEP DEMO SCENARIO -->
+      <section id="demo-walkthrough" class="doc-section">
+        <div class="section-tag">Section 8.0</div>
+        <h2 class="section-title">14-Step Automated Demonstration Scenario</h2>
+        <p>
+          Clicking <strong>"START DEMO SCENARIO"</strong> in the dashboard header triggers a 14-step automated sequence
+          illustrating the entire safety chain from fog onset through collision avoidance:
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Step #</th>
+                <th>Phase Name</th>
+                <th>Fog %</th>
+                <th>Visibility</th>
+                <th>Sensor Behavior & System Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Normal Mine Operation</td>
+                <td>10%</td>
+                <td>45 meters</td>
+                <td>Clear haul road. RGB camera confidence 95%. Safe speed 32 km/h.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Fog Inversion Onset</td>
+                <td>35%</td>
+                <td>28 meters</td>
+                <td>Moisture accumulates in Haul Road Cut #2. System issues advisory.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Visibility Decrease</td>
+                <td>55%</td>
+                <td>16 meters</td>
+                <td>Camera confidence drops to 48%. Radar signals track road edges.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Dumper V103 Enters Fog Pass</td>
+                <td>85%</td>
+                <td>4.2 meters</td>
+                <td>Severe blinding. Human driver sight drops to 4m.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>RGB Camera Degradation</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>Visual camera confidence drops to 18% (Fog obstruction alarm).</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>77 GHz Radar Detection</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td><strong>Radar pierces fog!</strong> Detects stationary dumper ahead at 16.5m.</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>FLIR Thermal Confirmation</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>Thermal IR confirms 92°C exhaust & worker signature.</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Multi-Sensor Fusion Node</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>Fuses Radar + Thermal + V2V: Distance 11.8m, confidence 96%.</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Collision Risk Escalation</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>Stopping distance (14.2m) &gt; target distance (11.8m). <strong>CRITICAL ALERT!</strong></td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Driver In-Cab Voice Alert</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>In-cab HUD speaks synthesized alert: <em>"Warning! Dumper ahead 11.8 meters!"</em></td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Command Center Dispatch Alert</td>
+                <td>92%</td>
+                <td>3.5 meters</td>
+                <td>Control room logs Red Alert #ALT-1093. Dispatch notifies patrol.</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Driver Deceleration</td>
+                <td>85%</td>
+                <td>5.0 meters</td>
+                <td>Operator applies secondary retarder brakes. Speed slows to 10 km/h.</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Hazard Cleared</td>
+                <td>60%</td>
+                <td>14 meters</td>
+                <td>Preceding truck advances. Distance opens up to 26 meters.</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>System Normalization</td>
+                <td>15%</td>
+                <td>40 meters</td>
+                <td>Fog disperses. System transitions back to SAFE status.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 9: QUICK START & VERIFICATION -->
+      <section id="quickstart" class="doc-section">
+        <div class="section-tag">Section 9.0</div>
+        <h2 class="section-title">Quick Start & Setup Guide</h2>
+        <pre>
+# 1. Single Command Launcher (FastAPI Backend + React Frontend)
+python run_app.py
+
+# 2. Access URLs
+Command Center Dashboard : http://localhost:5173
+Backend REST & WS Stream : http://localhost:8000
+Interactive Web Docs     : http://localhost:8000/documentation.html
+
+# 3. Regenerate Documentation QR Codes Anytime
+python generate_documentation_qr.py
+        </pre>
+      </section>
+
+      <footer>
+        <p>SMARTMINE — AI-Powered Fog Safety & Mine Vehicle Collision Avoidance System</p>
+        <p>NMDC Hackathon Problem Statement ID: 26007 &bull; Proof-of-Concept Prototype v1.0.0</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Client-Side Script for Dynamic QR and Clipboard Utilities -->
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied URL to clipboard: " + text);
+      }).catch(() => {
+        prompt("Copy URL manually:", text);
+      });
+    }
+
+    function copyDossierText() {
+      const text = `SMARTMINE: AI-Powered Fog Safety & Mine Vehicle Collision Avoidance (NMDC #26007)
+Problem: Severe fog/monsoon blinding in open-cast mines reduces visibility to 3-5m. Heavy 85t-120t dumpers need 15-25m stopping distance.
+Architecture: 77GHz mmWave Radar + FLIR Thermal IR + RGB Camera AI + RTK DGPS & 5.9GHz V2V mesh + Physics stopping distance engine.
+Formulas: d_fused = Σ(w_i * d_i) / Σ(w_i) [Radar dominates in fog]. d_stop = (v * 1.5s) + [v² / (2 * μ_eff * g)].
+Hardware: NVIDIA Jetson Orin Nano, Continental ARS408-21 77GHz Radar, FLIR Boson LWIR, Cohda MK6c C-V2X, 7" 1000-nit HUD.
+Web Docs: http://10.134.196.170:8000/documentation.html`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied offline technical dossier to clipboard!");
+      }).catch(() => {
+        prompt("Copy text manually:", text);
+      });
+    }
+
+    function updateCustomQR() {
+      const val = document.getElementById("custom-url-input").value.trim();
+      if (!val) return;
+      document.getElementById("portal-url-display").innerText = val;
+      // Use public QR service as instant fallback generator in the browser for custom URLs
+      const encoded = encodeURIComponent(val);
+      document.getElementById("qr-img-portal").src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encoded}&color=0284c7`;
+      alert("Updated QR Code to target: " + val);
+    }
+  </script>
+</body>
+</html>
